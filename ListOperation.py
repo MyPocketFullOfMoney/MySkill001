@@ -3,7 +3,7 @@
  * Description  : Python.List的增、删、改、查
  * Author       : Lichongyou
  * Date         : 2020-07-21 16:54:56
- * LastEditTime : 2020-07-21 17:11:06
+ * LastEditTime : 2020-07-22 10:05:49
  * LastEditors  : Lichongyou
 ''' 
 
@@ -24,3 +24,7 @@ print(list)
 
 #获取列表元素个数
 print('列表元素个数：',len(list))
+#翻转列表
+list.reverse()
+
+print('翻转后的列表：',list)
