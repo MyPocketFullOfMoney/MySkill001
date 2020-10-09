@@ -1,0 +1,5 @@
+1、克隆仓库到本地
+git clone [url]
+
+2、查看远程仓库信息
+git remote -v
