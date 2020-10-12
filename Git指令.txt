@@ -3,3 +3,12 @@ git clone [url]
 
 2、查看远程仓库信息
 git remote -v
+
+3、获取远程仓库代码
+git fetch
+4、获取后需要合并到当前分支
+git merge
+5、从远处仓库获取代码并合并到当前分支
+git pull
+6、将本地的分支版本上传到远程并合并
+git push
