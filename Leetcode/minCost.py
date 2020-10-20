@@ -24,7 +24,7 @@ class Solution:
             ch = s[i]
             MaxValue = 0
             total = 0
-            # 寻找重复字符中删除代价最大的
+            # 寻找重复字符,保留删除代价最大的字符
             while i < length and s[i] == ch:
                 MaxValue = max(MaxValue,cost[i])
                 total += cost[i]
