@@ -77,16 +77,28 @@ def get_sql(sql_file:str,table_name:List[str]):
             with open('new_m2db.sql','w+',encoding='utf8') as new_m2db_file:
                 
                 new_m2db_file.write('\n'.join(table_name) + '\n')
-                for i_name in table_name:
+                for i_name in table_name :
                     
                     # 处理关联查询的表名
                     # 表与表之间关联，会存在','
-                    if ',' in i_name:
+                    # 表名可能存在参数
+                    if ',' in i_name or '[' in i_name:
+                        
                         complex_name_str = i_name.replace(',',' ')
+                        # 统计参数的个数
+                        if i_name.count('[') > 1 :
+                            complex_name_str = i_name.replace(r'[@A]','910').replace(r'[@B]','01')
+                            
+                        else:
+                            complex_name_str = i_name.replace(r'[@]','910')
                         # split返回值为字符串列表
                         complex_name_list = complex_name_str.split(' ')
+                        print(complex_name_list)
                         # 无需去除表名的别称，因为匹配不上
                         for n in complex_name_list:
+                            # 如果表名已经存在，则直接退出。
+                            if n in table_name:
+                                break
                             # 新表名重新推入列表table_name
                             table_name.append(n)
 
@@ -109,12 +121,12 @@ def get_sql(sql_file:str,table_name:List[str]):
                 print(r'new_m2db.sql新文件生成完毕！')
 
 # main函数
-def main(argv):
+def main(config_file:str,sql_file:str):
     # 根据业务程序配置文件，获取表名
-    table_name = get_tablename(argv[1])                   
+    table_name = get_tablename(config_file)                   
 
     # 根据表名，获取建表语句
-    get_sql(argv[2],table_name)
+    get_sql(sql_file,table_name)
 
     # 最后输出下表名
     print('表名：',table_name)             
@@ -124,8 +136,8 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    #config_file = r"C:\Users\lcy_yy\Documents\GitHub\Python\acct_m2db.xml"
-    #sql_file = r"C:\Users\lcy_yy\Documents\GitHub\Python\m2db0_20210223.sql"
+    config_file = r"mon_acct.xml"
+    sql_file = r"m2db__136.96.61.177.sql"
     # 最后输出下表名
-    main(sys.argv)
+    main(config_file,sql_file)
     
