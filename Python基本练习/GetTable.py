@@ -8,6 +8,7 @@
 from typing import List
 import re
 import sys
+import os
 
 # 第一步，获取表名
 # 参数cfg_path表示文件的绝对路径
@@ -15,7 +16,7 @@ import sys
 def get_tablename(cfg_path:str) -> List[str]:
     # 保存表名
     t_name = []
-    # 保持匹配的字符串
+    # 保存匹配的字符串
     re_str = []
     
     table_id = 1
@@ -36,15 +37,24 @@ def get_tablename(cfg_path:str) -> List[str]:
                 # 第二个正则项：\s+on.*，匹配以from开头，where单词结尾的字符串。
 
                 # 利用findall函数，返回符合的匹配项数据类型为列表
-                name_list = re.findall(r'\s+from.*\s+on|\s+from.*\s+where\b',content_line)
+                r"""
+                匹配四中场景：
+                  from abc on:查询语句走索引 
+                  from abc where：查询语句有where条件，但不走索引
+                  from abc\s\n：查询语句不走索引，也没有where条件，但后面跟空白字符后换行
+                  from abc\n：查询语句不走索引，也没有where条件，后面直接换行
+                """
+                name_list = re.findall(r'\s+from.*\s+on|\s+from.*\s+where\b|\s+from\s+\w+$|\s+from\s+\w+\s+$',content_line,re.I)
                 name_str = ' '.join(name_list)
+                
 
                 # 如果匹配成功，输出表名
                 # 匹配的字符串样例,from TB_PRD_OFR on
                 if name_str:
                     re_str.append(name_str)
+                    #print('\n'.join(re_str))
                     # 除去from、where、on关键字，空格,where开头，on结尾的字符串
-                    name_tab = re.sub(r'\s+where.*\bon|\s+from\s+|\s+on|\s+where','',name_str)
+                    name_tab = re.sub(r'\s+where.*\bon|\s+from\s+|\s+on|\s+where','',name_str,flags=re.I)
                     
                     # 放入列表
                     t_name.append(name_tab)
@@ -93,7 +103,7 @@ def get_sql(sql_file:str,table_name:List[str]):
                             complex_name_str = i_name.replace(r'[@]','910')
                         # split返回值为字符串列表
                         complex_name_list = complex_name_str.split(' ')
-                        print(complex_name_list)
+                        #print(complex_name_list)
                         # 无需去除表名的别称，因为匹配不上
                         for n in complex_name_list:
                             # 如果表名已经存在，则直接退出。
@@ -120,24 +130,36 @@ def get_sql(sql_file:str,table_name:List[str]):
                         new_m2db_file.write(create_str + '\n' + result_index_str + '\n')
                 print(r'new_m2db.sql新文件生成完毕！')
 
+
 # main函数
 def main(config_file:str,sql_file:str):
-    # 根据业务程序配置文件，获取表名
-    table_name = get_tablename(config_file)                   
+    pass
+                      
 
-    # 根据表名，获取建表语句
-    get_sql(sql_file,table_name)
+    
 
-    # 最后输出下表名
-    print('表名：',table_name)             
+                 
                 
 
             
 
 
 if __name__ == '__main__':
-    config_file = r"mon_acct.xml"
+    config_path = r"C:\Users\lcy_yy\Documents\GitHub\Python\config"
     sql_file = r"m2db__136.96.61.177.sql"
+    result_name_list = []
+
+    for file_name in os.listdir(config_path):
+        # 获取文件的绝对路径
+        config_file = os.path.join(config_path,file_name)
+        # 根据业务程序配置文件，获取表名
+        table_name = get_tablename(config_file)
+        # 
+        result_name_list.extend(table_name) 
+    
+    
+    # 根据表名，获取建表语句
+    get_sql(sql_file,table_name)
     # 最后输出下表名
-    main(config_file,sql_file)
+    print('表名：',result_name_list)
     
