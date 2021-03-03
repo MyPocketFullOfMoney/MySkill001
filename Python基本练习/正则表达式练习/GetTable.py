@@ -146,7 +146,7 @@ def main(config_file:str,sql_file:str):
 
 if __name__ == '__main__':
     config_path = r"C:\Users\lcy_yy\Documents\GitHub\Python\config"
-    sql_file = r"m2db__136.96.61.177.sql"
+    sql_file = r"C:\Users\lcy_yy\Documents\GitHub\Python\m2db__136.96.61.177.sql"
     result_name_list = []
 
     for file_name in os.listdir(config_path):
