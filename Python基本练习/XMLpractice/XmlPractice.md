@@ -9,7 +9,7 @@
 `module_db = RootNode.getElementsByTagName('module')`
 
 最后就是遍历`<module>`元素，当`<module>`的属性值等于 `ocsm2db_bill`,则获取元素`<sql>`的值。
-
+    
     # 判断模块的属性值
     if 'ocsm2db_bill' == module_v.getAttribute('name'):
         sql_str_list = []
@@ -21,6 +21,7 @@
             sql_value = re.sub(r'^\s+|\s+$','',sql_node.childNodes[0].data)
             # 获取到select语句
             sql_str_list.append(sql_value)
+
 
 函数`getAttribute`获取元素的属性值。
 调用方法为`[元素对象].getAttribute([元素属性名称])`
