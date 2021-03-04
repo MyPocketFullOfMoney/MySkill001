@@ -38,13 +38,10 @@ def get_tablename(cfg_path:str) -> List[str]:
 
                 # 利用findall函数，返回符合的匹配项数据类型为列表
                 r"""
-                匹配四中场景：
-                  from abc on:查询语句走索引 
-                  from abc where：查询语句有where条件，但不走索引
-                  from abc\s\n：查询语句不走索引，也没有where条件，但后面跟空白字符后换行
-                  from abc\n：查询语句不走索引，也没有where条件，后面直接换行
+                配置文件中，表名由字母、数字、_、[、]、@等字符组成，而且关键字from后面肯定是表名
+                正则匹配表达式：\bfrom\s+[A-Za-z0-9_\[\]@]+
                 """
-                name_list = re.findall(r'\s+from.*\s+on|\s+from.*\s+where\b|\s+from\s+\w+$|\s+from\s+\w+\s+$',content_line,re.I)
+                name_list = re.findall(r'\bfrom\s+[A-Za-z0-9_\[\]@]+',content_line,re.I)
                 name_str = ' '.join(name_list)
                 
 
@@ -53,8 +50,8 @@ def get_tablename(cfg_path:str) -> List[str]:
                 if name_str:
                     re_str.append(name_str)
                     #print('\n'.join(re_str))
-                    # 除去from、where、on关键字，空格,where开头，on结尾的字符串
-                    name_tab = re.sub(r'\s+where.*\bon|\s+from\s+|\s+on|\s+where','',name_str,flags=re.I)
+                    # 除去from关键字
+                    name_tab = re.sub(r'\bfrom\s+','',name_str,flags=re.I)
                     
                     # 放入列表
                     t_name.append(name_tab)
@@ -69,6 +66,7 @@ def get_tablename(cfg_path:str) -> List[str]:
 def get_sql(sql_file:str,table_name:List[str]):
     # 表名去重
     table_name = list(set(table_name))
+    
 
     # 打开sql文件
     with open(sql_file,'r+',encoding='utf8') as sql:
@@ -145,8 +143,8 @@ def main(config_file:str,sql_file:str):
 
 
 if __name__ == '__main__':
-    config_path = r"C:\Users\lcy_yy\Documents\GitHub\Python\config"
-    sql_file = r"C:\Users\lcy_yy\Documents\GitHub\Python\m2db__136.96.61.177.sql"
+    config_path = r"D:\办公区\GitHubDesktop\Python\config"
+    sql_file = r"D:\NotePad++_SAVE\tydic_09\ReviceFile_QQ\m2db__136.96.61.177.sql"
     result_name_list = []
 
     for file_name in os.listdir(config_path):
@@ -159,7 +157,7 @@ if __name__ == '__main__':
     
     
     # 根据表名，获取建表语句
-    get_sql(sql_file,table_name)
+    get_sql(sql_file,result_name_list)
     # 最后输出下表名
     print('表名：',result_name_list)
     
