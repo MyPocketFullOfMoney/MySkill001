@@ -23,7 +23,61 @@ awk -v FS='|' '{print $1,$4}' filename
 买东西要按需购买，不知道学习能不能按需学习- - 
 
 # 文件、字符命令
-## ls
-   #按创建时间倒序显示文件  
-   ls -rt
-   
+## ls指令
+按创建时间倒序显示文件  
+`ls -rt`
+
+## tar指令
+
+存在目录test  
+打包并压缩目录test  
+`tar -czvf test.tar.gz test`
+
+显示打包文件的内容，不解压  
+`tar -tvf test.tar.gz`
+
+解压打包文件  
+`tar -xzvf test.tar.gz`  
+解压打包文件到指定的目录  
+`tar -xzvf test.tar.gz -C /user/tmp`  
+>参数解析  
+-z 通过gzip指令处理备份文件  
+-v 显示指令执行过程  
+-f 指定备份文件  
+-c 创建新的备份文件（打包）  
+-C 切换到指定的目录  
+-t 列出备份文件的内容  
+-x 从备份文件中还原文件（解压）
+
+
+## unzip指令  
+存在压缩包`test.zip`  
+查看压缩包内容  
+`unzip -l test.zip`  
+显示压缩的详细信息
+`unzip -v test.zip`  
+直接解压  
+`unzip test.zip`  
+指定目录解压  
+`unzip -d /user/tmp test.zip`  
+
+## df指令  
+用于Linux系统上的文件系统磁盘使用情况  
+常用`df -h`  
+
+## du指令
+用于显示目录或者文件的大小
+常用`du -h`
+
+## find命令
+用来在指定目录下查找文件    
+
+# Linux中的通配符  
+- \* 匹配任意长度的字符，可以是0个
+- ？ 匹配任意单个字符，必须是1个
+- [] 匹配指定字符范围内的任意单个字符
+- [a-Z] 表示所有大小写字母
+- [a-z] 表示a,A,b,B...z,不包含Z
+- [A-Z] 表示A,b,B...,z,Z,不包含a  
+>与正则表达式的语法不同，不要混肴！！！
+
