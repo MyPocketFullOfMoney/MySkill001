@@ -22,13 +22,10 @@ import re
 ### 代码实例
 ```python
     r"""
-    匹配四中场景：
-      from abc on:只要查询语句走索引，无论有无where条件，都能匹配 
-      from abc where：查询有where条件，但不走索引
-      from abc\s\n：查询语索引，也没有where条后面跟空白字符后换行
-      from abc\n：查询语句引，也没有where条件直接换行
+    配置文件中，表名由字母、数字、_、'['、']'、'@'等字符组成，而且关键字from后面肯定是表名
+    正则匹配表达式：\bfrom\s+[A-Za-z0-9_\[\]@]+
     """
-    name_list = re.findall(r+from.*\s+on|\s+from.+where\b|\s+from\s+\w+$+from\s+\w+\s+content_line,re.I)
+    name_list = re.findall(r'\bfrom\s+[A-Za-z0-9_\[\]@]+',content_line,re.I)
 ```
 ## sub方法介绍  
 ### 描述  
