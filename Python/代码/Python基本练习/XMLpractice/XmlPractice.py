@@ -20,11 +20,13 @@ for module_v in module_db:
 
     # 判断模块的属性值
     if 'ocsm2db_bill' == module_v.getAttribute('name'):
+        
         sql_str_list = []
         # 获取模块中的所有<sql>元素
         sql_coll = module_v.getElementsByTagName('sql')
         # sql节点存在sql_coll
         for sql_node in sql_coll:
+            #print("参数:",sql_node.getAttribute("sub"))
             # 获取sql元素的值，并替换字符串前后的空白字符
             sql_value = re.sub(r'^\s+|\s+$','',sql_node.childNodes[0].data)
             # 获取到select语句
