@@ -3,6 +3,12 @@
 <!-- TOC -->
 
 - [目录](#目录)
+  - [字符串](#字符串)
+    - [字符串格式化](#字符串格式化)
+      - [python字符串格式化符号](#python字符串格式化符号)
+      - [实例](#实例)
+      - [str.format()函数](#strformat函数)
+      - [应用场景](#应用场景)
   - [模块](#模块)
     - [1、模块的定义](#1模块的定义)
     - [2、import语句导入模块](#2import语句导入模块)
@@ -11,6 +17,75 @@
     - [5、包](#5包)
 
 <!-- /TOC -->
+
+## 字符串
+
+### 字符串格式化
+
+#### python字符串格式化符号
+
+| 符号 | 描述 |
+| ---- | ---- |
+| %s | 格式化字符串 |
+| %d | 格式化整数 |
+
+#### 实例
+
+```python
+    t_str = 'My name is %s'
+    result = t_str%'test'
+    print(result)
+```
+
+输出结果
+>My name is test
+
+#### str.format()函数
+
+`format`函数可以接受不限个参数，位置可以不按顺序。
+参数类型可以是列表、字典、对象
+
+```python
+    # 通过字典设置参数
+i_dict = {'name':'python','age':'18'}
+t_str = 'My name is {name},age {age}'
+
+print(t_str.format(**i_dict))
+
+
+# 通过列表索引设置参数
+i_list = ['test','18']
+t_str = 'My name is {0[0]},age {0[1]}'
+
+print(t_str.format(i_list))
+```
+
+输出结果
+>My name is python,age 18  
+>My name is test,age 18
+
+#### 应用场景
+
+1. python操作mysql，批量生成测试数据。
+
+  ```python
+    # 打开数据库连接
+    with pymysql.connect(host="127.0.0.1", user="root", passwd="123456",     database="data_li") as db:
+        # 获取游标
+        cursor = db.cursor()
+    
+        # sql语句
+        sql = '''insert into employee (FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) \
+            values ('Huawei','Rongyao',{0[0]},'M',{0[1]})
+            '''
+    
+        for i in range(1, 11):
+            i_list = [i, i+400]
+            # 执行
+            cursor.execute(sql.format(i_list))
+        # 提交
+        db.commit()
+  ```
 
 ## 模块  
 
