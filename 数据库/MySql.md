@@ -8,3 +8,17 @@
     `desc [tablename]`  
 - 查看建表语句  
     `show create table [tablename]`
+
+## 常用函数
+
+### concat
+
+### sum
+
+### date_format
+
+### sysdate
+
+### ifnull
+
+### 开窗函数
