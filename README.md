@@ -13,7 +13,7 @@
 - [操作系统](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
 - [数据库](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E6%95%B0%E6%8D%AE%E5%BA%93)
 - [软件工程](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B)
-- [计算机网络](计算机网络/计算机网络知识.md)
+- [计算机网络](https://github.com/MyPocketFullOfMoney/MySkill001/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86.md)
 - 中间件
 - 其他
 
