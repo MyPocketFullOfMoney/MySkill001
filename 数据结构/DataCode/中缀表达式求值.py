@@ -67,6 +67,6 @@ def calculation(optr_stack:List,opnd_stack:List):
 
         
 if __name__ == '__main__':
-    exper = '3+(4-5+6+8)'
+    exper = '5-3+9*6*(6-1-2)'
 
     print(Solution(exper))
