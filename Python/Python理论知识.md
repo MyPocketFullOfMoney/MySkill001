@@ -3,97 +3,38 @@
 <!-- TOC -->
 
 - [目录](#目录)
-  - [字符串](#字符串)
-    - [字符串格式化](#字符串格式化)
-      - [python字符串格式化符号](#python字符串格式化符号)
-      - [实例](#实例)
-      - [str.format()函数](#strformat函数)
-      - [应用场景](#应用场景)
   - [模块](#模块)
     - [1、模块的定义](#1模块的定义)
     - [2、import语句导入模块](#2import语句导入模块)
     - [3、from ... import 语句](#3from--import-语句)
     - [4、__name__属性](#4__name__属性)
     - [5、包](#5包)
+  - [Python常用的数据结构](#python常用的数据结构)
+    - [字符串](#字符串)
+      - [字符串格式化](#字符串格式化)
+        - [python字符串格式化符号](#python字符串格式化符号)
+        - [实例](#实例)
+        - [str.format()函数](#strformat函数)
+        - [应用场景](#应用场景)
+    - [列表](#列表)
+    - [元组](#元组)
+    - [元组的解包](#元组的解包)
+    - [集合](#集合)
+    - [字典](#字典)
+  - [赋值、浅拷贝、深拷贝的区别](#赋值浅拷贝深拷贝的区别)
   - [函数](#函数)
     - [函数的定义](#函数的定义)
     - [函数的传参方式](#函数的传参方式)
-  - [Python常用的数据结构](#python常用的数据结构)
-    - [列表](#列表)
-    - [元组](#元组)
-    - [集合](#集合)
-    - [字典](#字典)
+  - [面向对象](#面向对象)
+    - [类的定义](#类的定义)
+    - [类的成员](#类的成员)
+    - [类方法](#类方法)
+  - [迭代器和生成器](#迭代器和生成器)
+  - [装饰器](#装饰器)
+  - [上下文管理器](#上下文管理器)
+  - [多线程](#多线程)
 
 <!-- /TOC -->
-
-## 字符串
-
-### 字符串格式化
-
-#### python字符串格式化符号
-
-| 符号 | 描述 |
-| ---- | ---- |
-| %s | 格式化字符串 |
-| %d | 格式化整数 |
-
-#### 实例
-
-```python
-    t_str = 'My name is %s'
-    result = t_str%'test'
-    print(result)
-```
-
-输出结果
->My name is test
-
-#### str.format()函数
-
-`format`函数可以接受不限个参数，位置可以不按顺序。
-参数类型可以是列表、字典、对象
-
-```python
-    # 通过字典设置参数
-i_dict = {'name':'python','age':'18'}
-t_str = 'My name is {name},age {age}'
-
-print(t_str.format(**i_dict))
-
-
-# 通过列表索引设置参数
-i_list = ['test','18']
-t_str = 'My name is {0[0]},age {0[1]}'
-
-print(t_str.format(i_list))
-```
-
-输出结果
->My name is python,age 18  
->My name is test,age 18
-
-#### 应用场景
-
-1. python操作mysql，批量生成测试数据。
-
-  ```python
-    # 打开数据库连接
-    with pymysql.connect(host="127.0.0.1", user="root", passwd="123456",     database="data_li") as db:
-        # 获取游标
-        cursor = db.cursor()
-    
-        # sql语句
-        sql = '''insert into employee (FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) \
-            values ('Huawei','Rongyao',{0[0]},'M',{0[1]})
-            '''
-    
-        for i in range(1, 11):
-            i_list = [i, i+400]
-            # 执行
-            cursor.execute(sql.format(i_list))
-        # 提交
-        db.commit()
-  ```
 
 ## 模块  
 
@@ -172,25 +113,7 @@ from语句让你从模块中导入一个指定的部分到当前命名空间。
 
 目录只有包含一个叫做`__init__.py`的文件才会被认作是一个包。  
 
-## 函数
-
-### 函数的定义
-
-```python
-def function_name(parameter_1,parameter_2):
-    函数体
-```
-
-### 函数的传参方式
-
-- 以元组为参数，在参数名前加\*号表示区别。
-- 以字典为参数，在参数名前加\*\*号表示区别。
-
 ## Python常用的数据结构
-
-### 列表
-
-### 元组
 
 在Python有六个标准数据类型：
 
@@ -221,6 +144,134 @@ a = 10，a指向的内存地址为12345;对变量a再进行赋值，a = 20，a�
   t_tuple = (a_list,'a')
 ```
 
+### 字符串
+
+#### 字符串格式化
+
+##### python字符串格式化符号
+
+| 符号 | 描述 |
+| ---- | ---- |
+| %s | 格式化字符串 |
+| %d | 格式化整数 |
+
+##### 实例
+
+```python
+    t_str = 'My name is %s'
+    result = t_str%'test'
+    print(result)
+```
+
+输出结果
+>My name is test
+
+##### str.format()函数
+
+`format`函数可以接受不限个参数，位置可以不按顺序。
+参数类型可以是列表、字典、对象
+
+```python
+    # 通过字典设置参数
+i_dict = {'name':'python','age':'18'}
+t_str = 'My name is {name},age {age}'
+
+print(t_str.format(**i_dict))
+
+
+# 通过列表索引设置参数
+i_list = ['test','18']
+t_str = 'My name is {0[0]},age {0[1]}'
+
+print(t_str.format(i_list))
+```
+
+输出结果
+>My name is python,age 18  
+>My name is test,age 18
+
+##### 应用场景
+
+1. python操作mysql，批量生成测试数据。
+
+  ```python
+    # 打开数据库连接
+    with pymysql.connect(host="127.0.0.1", user="root", passwd="123456",     database="data_li") as db:
+        # 获取游标
+        cursor = db.cursor()
+    
+        # sql语句
+        sql = '''insert into employee (FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) \
+            values ('Huawei','Rongyao',{0[0]},'M',{0[1]})
+            '''
+    
+        for i in range(1, 11):
+            i_list = [i, i+400]
+            # 执行
+            cursor.execute(sql.format(i_list))
+        # 提交
+        db.commit()
+  ```
+
+### 列表
+
+### 元组
+
+### 元组的解包
+
 ### 集合
 
 ### 字典
+
+## 赋值、浅拷贝、深拷贝的区别
+
+## 函数
+
+### 函数的定义
+
+```python
+def function_name(parameter_1,parameter_2):
+    函数体
+```
+
+### 函数的传参方式
+
+- 以元组为参数，在参数名前加\*号表示区别。
+- 以字典为参数，在参数名前加\*\*号表示区别。
+
+## 面向对象
+
+### 类的定义
+
+```python
+  class ClassNaem:
+    '''这是一个people类'''
+    # 这是一个类变量，在整个实例化的对象中共用
+    i_class = 1
+    
+    # 定义构造函数
+    def __init__(self,i_num):
+      # i_self是一个实例变量
+      self.i_self = i_num
+    .
+    .
+    <statement-n>
+```
+
+### 类的成员
+
+一个类中成员可以有变量和方法。其中以双下划线开头的成员为私有变量或方法。
+
+### 类方法
+
+类方法中，必须有一个额外的**第一个参数名称**，按照惯例第一个参数命名为self，代表实例本身。
+
+self并不是Python的关键字，我们用其它名字命名也行。
+
+## 迭代器和生成器
+
+## 装饰器
+
+## 上下文管理器
+
+## 多线程
