@@ -22,8 +22,15 @@ class MysqlDBDriver(object):
         return self.db_cur
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # 关闭前先提交
-        self.db_con.commit()
+
+        if exc_type:
+            print(exc_val)
+            self.db_con.rollback()
+            print('发生异常，回滚数据！')
+            return True
+        else:
+            # 关闭前先提交
+            self.db_con.commit()
 
         # 关闭游标
         self.db_cur.close()
@@ -33,7 +40,9 @@ class MysqlDBDriver(object):
 
 
 with MysqlDBDriver('localhost','root','123456','data_li') as li_cur:
-    li_cur.execute('select * from EMPLOYEE')
+    li_cur.execute('select * from aaa')
     result_tuple = li_cur.fetchall()
     print('结果：')
     print(result_tuple)
+
+print('结束!')
