@@ -10,10 +10,10 @@
 - LeetCode
 - [Python](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/Python)
 - [工具篇](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E5%B7%A5%E5%85%B7)
-- [操作系统](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
-- [数据库](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E6%95%B0%E6%8D%AE%E5%BA%93)
-- [软件工程](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B)
-- [计算机网络](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C)
+- [操作系统](操作系统)
+- [数据库](数据库/数据库知识.md)
+- [软件工程](软件工程/测试理论总结.md)
+- [计算机网络](计算机网络/计算机网络知识.md)
 - 中间件
 - 其他
 
