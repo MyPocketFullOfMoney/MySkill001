@@ -7,7 +7,7 @@
 
 目前打算分为以下方向进行学习和总结。
 
-- LeetCode
+- [LeetCode](Leetcode/题目.md)
 - [Python](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/Python)
 - [工具篇](https://github.com/MyPocketFullOfMoney/MySkill001/tree/master/%E5%B7%A5%E5%85%B7)
 - [操作系统](操作系统)
