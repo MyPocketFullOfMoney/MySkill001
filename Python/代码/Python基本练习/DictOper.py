@@ -39,4 +39,13 @@ print("count所有的key:",count.keys())
 
 
 # 无法理解这行代码！
+"""
+ max(可迭代对象,[key=])
+ 当第一个参数为可迭代对象时，可以通过后面的key参数传入比较最大值的方法，通过该方法获取到最大值，返回可迭代对象中对应的值。
+ 例如max(dict.keys(),key=dict.get)
+ dict.keys()：将字典中的键视图的方式返回，其中视图可迭代
+ key=dict.get:将字典的get方法赋值给key。
+ 这样获取dict字典中键的最大值，比较方法为比较字典中值的最大值，比较完成后返回对应的键名。
+
+"""
 print(max(count.keys(),key=count.get))

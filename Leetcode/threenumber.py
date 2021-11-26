@@ -20,7 +20,7 @@ from typing import List
 
 class Solution:
     def threeSum(self,nums:List[int]) -> List[List[int]]:
-        # 通过排序去重
+        # 排序
         nums.sort()
         n = len(nums)
         ans = list()
